@@ -1,0 +1,33 @@
+name: Execute Delete Query
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install psycopg2
+        run: |
+          pip install psycopg2-binary
+
+      - name: Execute onlinehost
+        env:
+          POSTGRES_HOST: SG-horn-vase-6540-5373-pgsql-master.servers.mongodirector.com
+          POSTGRES_DB: checkup
+          POSTGRES_USER: sgpostgres
+          POSTGRES_PASSWORD: cg@G2qt8fahc2Iso
+        run: python onlinehost.py
+          
